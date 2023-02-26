@@ -5,6 +5,11 @@ h1{
   text-align: center;
   font-family: "Gill Sans", sans-serif;
 }
+h3{
+  text-align: center;
+  margin: auto;
+}
+
 .container{
   border: black double;
   margin: auto;
@@ -25,6 +30,7 @@ h1{
 h2{
   text-align: center;
 }
+
 
 
 .button-12 {

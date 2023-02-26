@@ -50,12 +50,18 @@ botButt.addEventListener("click", function () {
   printQuestion();
   ansList.hidden = false;
   buttData.hidden = true;
+  timerDis.textContent = "Your time left is " + timeScore + " seconds"
   printLi();
   intervalID = setInterval(function(){
     timeScore--
-
+    if (timeScore > 1){
+      timerDis.textContent = "Your time left is " + timeScore + " seconds"
+  } else if (timeScore == 1){
+    timerDis.textContent = "You have 1 Second left"
+  } else {
+    timerDis.textContent = "You have run out of time"
   }
-  , 1000);
+}, 1000);
 });
 
 for (let index = 0; index < ansButts.length; index++) {
