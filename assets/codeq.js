@@ -14,6 +14,7 @@ var questionIndex = 0;
 var intervalID 
 var val
 var saved_score = localStorage.getItem("Myscore")
+var highInitials = localStorage.getItem("MyInitials")
 //first call on the button to clear the innerhtml of the question and button, change it to submit, generate a list of answers and change h1 to the question
 const qArr = [
   "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -65,9 +66,14 @@ function printQuestion() {
     ansList.hidden = true 
     qheader.textContent = "Congrats on finishing the test with a score of " + timeScore
     compScore.hidden = false
-    compScore.textContent = "The high score is " + saved_score
     timerDis.textContent = ""
     buttonPop()
+    if (!isNaN(number(saved_score)) == true){
+      compScore.textContent = "The high score is " + saved_score + " by " + highInitials
+    } else {
+      compScore.textContent = ""
+    }
+    
   }
 }
 
@@ -88,20 +94,33 @@ function buttonPop(){
 
   }
 function saveScore(){
+  
   butto1.hidden = true
   score = timeScore
   console.log(saved_score)
   console.log(score)
   compScore.hidden = true
-  if (saved_score > score){
-    qheader.textContent= 'Sorry but you did not beat the high score of ' + saved_score
-  } else if (saved_score == score){
-    qheader.textContent = 'Sorry but you have tied for the high score of ' +saved_score
-  } else if (saved_score < score){
-    qheader.textContent= 'Congrats on beating the high score of ' + saved_score   
-    localStorage.setItem("Myscore", score)
-  }  
-}
+    if (saved_score > score){
+      qheader.textContent= 'Sorry but you did not beat the high score of ' + saved_score + " by " + highInitials
+    } else if (saved_score == score){
+      qheader.textContent = 'Sorry but you have tied for the high score of ' +saved_score + " by " + highInitials
+    } else if (saved_score < score){
+      console.log(typeof(saved))
+      if (saved_score == !null){
+        qheader.textContent= 'Congrats on beating the high score of ' + saved_score + " by " + highInitials
+      } else {qheader.textContent = "Congrats on setting a score of " + score}
+      initials = window.prompt("What are your initials?") 
+      var leng = initials.length
+      while (leng > 5){
+        console.log(leng)
+        initials = window.prompt("Sorry, the name is too long. Please use 4 or less characters.")
+        leng = initials.length
+      }
+      localStorage.setItem("MyInitials", initials)  
+      localStorage.setItem("Myscore", score)
+      }
+}    
+
 
 function resetPage(){
   location.reload()
@@ -140,7 +159,7 @@ for (let index = 0; index < ansButts.length; index++) {
     console.log(correctAns);
     questionIndex++
     printQuestion()
-    if (questionIndex < 4)
+    if (questionIndex < 5)
       printLi()
     
     
