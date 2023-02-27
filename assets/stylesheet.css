@@ -54,6 +54,10 @@ h2{
   width: 100%;
   background-color: rgba(194, 211, 214, 0.874);
 }
+#compareScore{
+  padding: 10px 10px 20px 10px;
+
+}
 .button-12[hidden]{
   display: none;
 }
